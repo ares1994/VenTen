@@ -11,12 +11,17 @@
         <variable
             name="listener"
             type="com.arepadeobiri.arepadeobiri.FilterRecyclerAdapter.FilterOnClickedListener" />
+
+        <variable
+            name="color"
+            type="int" />
     </data>
 
     <LinearLayout
         android:id="@+id/container"
         listener="@{listener}"
         filterItem="@{filter}"
+        backgroundColor="@{color}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

@@ -2,6 +2,7 @@ package com.arepadeobiri.arepadeobiri
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -19,6 +20,8 @@ class FilteredActivity : AppCompatActivity() {
                 this,
                 R.layout.activity_filtered
             )
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         val viewModelFactory =
@@ -42,11 +45,12 @@ class FilteredActivity : AppCompatActivity() {
 
             val list = Util.readCsvFile(it)
 
+            Log.d("Ares", list?.subList(0, 8).toString())
+
             val filteredList = filterItem?.let { Util.getFilteredCarOwners(it, list) }
 
             if (filteredList!!.isEmpty()) {
                 Util.getSnackBar(binding.root, "There are no owners that match these filters")
-                finish()
             } else {
                 filteredRecyclerAdapter.submitList(filteredList)
             }
@@ -57,5 +61,10 @@ class FilteredActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    override fun onNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

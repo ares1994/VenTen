@@ -26,7 +26,7 @@ class FilteredRecyclerAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val carOwner = getItem(position)
-        holder.bind(carOwner)
+        holder.bind(carOwner, Util.CHART_COLORS[position%Util.CHART_COLORS.size])
     }
 
 
@@ -35,8 +35,10 @@ class FilteredRecyclerAdapter :
 
 
         fun bind(
-            carOwner: CarOwner
+            carOwner: CarOwner,
+            color : Int
         ) {
+            binding.color = color
             binding.carOwner = carOwner
             binding.executePendingBindings()
         }

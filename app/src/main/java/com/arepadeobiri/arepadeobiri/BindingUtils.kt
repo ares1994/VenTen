@@ -1,5 +1,6 @@
 package com.arepadeobiri.arepadeobiri
 
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -140,6 +141,16 @@ fun LinearLayout.listener(
         listener.onClicked(filter)
     }
 
+}
+
+
+
+
+@BindingAdapter("backgroundColor")
+fun View.backgroundColor(
+    color : Int
+) {
+    setBackgroundColor(color)
 }
 
 

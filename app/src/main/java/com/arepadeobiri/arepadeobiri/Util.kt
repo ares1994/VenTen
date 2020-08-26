@@ -1,6 +1,7 @@
 package com.arepadeobiri.arepadeobiri
 
 
+import android.graphics.Color
 import android.view.View
 import com.arepadeobiri.arepadeobiri.dataModels.CarOwner
 import com.arepadeobiri.arepadeobiri.dataModels.FilterItem
@@ -93,6 +94,8 @@ class Util {
         }
 
 
+
+        // Returns Snackbars
         fun getSnackBar(view: View, text: String) {
 
             Snackbar.make(view, text, Snackbar.LENGTH_LONG).show()
@@ -100,6 +103,9 @@ class Util {
         }
 
 
+
+
+        //Filters car owners based on filter parameters passed and the list of Car Owners passed from CSV
         fun getFilteredCarOwners(filterItem: FilterItem, list: List<CarOwner?>?): List<CarOwner?>? {
             val filteredList = mutableListOf<CarOwner?>()
 
@@ -129,6 +135,34 @@ class Util {
             return filteredList
         }
 
+
+
+        val CHART_COLORS = intArrayOf(
+            Color.rgb(244, 67, 54),
+            Color.rgb(103, 58, 183),
+            Color.rgb(63, 81, 181),
+            Color.rgb(76, 175, 80),
+            Color.rgb(255, 193, 7),
+            Color.rgb(0, 150, 136),
+            Color.rgb(233, 30, 99),
+            Color.rgb(33, 150, 243),
+            Color.rgb(213, 29, 29),
+            Color.rgb(205, 220, 57),
+            Color.rgb(156, 39, 176),
+            Color.rgb(233, 118, 30),
+            Color.parseColor("#Ae2a9a"),
+            Color.parseColor("#2aae30"),
+            Color.parseColor("#3d2aae"),
+            Color.parseColor("#644e03"),
+            Color.parseColor("#024d54"),
+            Color.parseColor("#F20865"),
+            Color.parseColor("#F2be08"),
+            Color.parseColor("#C2c408"),
+            Color.parseColor("#F3c576"),
+            Color.parseColor("#Ff0b05"),
+            Color.parseColor("#1c0264"),
+            Color.parseColor("#C70b87")
+        )
     }
 }
 

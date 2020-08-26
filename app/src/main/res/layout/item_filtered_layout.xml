@@ -7,10 +7,16 @@
         <variable
             name="carOwner"
             type="com.arepadeobiri.arepadeobiri.dataModels.CarOwner" />
+
+        <variable
+            name="color"
+            type="int" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
+        backgroundColor="@{color}"
+        android:id="@+id/container"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 

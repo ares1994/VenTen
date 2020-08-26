@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), FilterRecyclerAdapter.FilterOnClickedL
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
+        binding.refreshLayout.setColorSchemeColors(getColor(R.color.colorPrimary))
+
         val viewModelFactory =
             GeneralViewModelFactory(application)
 
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity(), FilterRecyclerAdapter.FilterOnClickedL
             if (it == null) return@Observer
 
             Util.getSnackBar(binding.root, it)
+            binding.refreshLayout.isRefreshing = false
+
 
             viewModel.setFailedToNull()
         })
@@ -48,13 +52,24 @@ class MainActivity : AppCompatActivity(), FilterRecyclerAdapter.FilterOnClickedL
         viewModel.filters.observe(this, Observer {
 
 
-            binding.progressBar.visibility = View.GONE
+//            binding.progressBar.visibility = View.GONE
             filterRecyclerAdapter.submitList(it)
+
+            binding.refreshLayout.isRefreshing = false
         })
+
+
+
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getFilters()
+
+            binding.refreshLayout.isRefreshing = true
+        }
 
 
         //Get Filters
         viewModel.getFilters()
+        binding.refreshLayout.isRefreshing = true
 
         //Get CSV
         viewModel.downloadCsv(this.externalCacheDir)

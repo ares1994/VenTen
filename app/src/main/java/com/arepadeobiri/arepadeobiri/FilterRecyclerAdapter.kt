@@ -33,7 +33,7 @@ class FilterRecyclerAdapter(private val listener: FilterOnClickedListener) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val filter = getItem(position)
-        holder.bind(filter, listener)
+        holder.bind(filter, listener, Util.CHART_COLORS[position%Util.CHART_COLORS.size])
     }
 
 
@@ -43,8 +43,10 @@ class FilterRecyclerAdapter(private val listener: FilterOnClickedListener) :
 
         fun bind(
             filter: FilterItem,
-            listener: FilterOnClickedListener
+            listener: FilterOnClickedListener,
+            color:Int
         ) {
+            binding.color = color
             binding.filter = filter
             binding.listener = listener
             binding.executePendingBindings()
