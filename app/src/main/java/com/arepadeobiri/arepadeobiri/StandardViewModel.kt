@@ -83,7 +83,7 @@ class StandardViewModel(application: Application) : AndroidViewModel(application
                 }
 
             }catch (t:Throwable){
-                _failed.postValue("It failed")
+                _failed.postValue("Failed to retreive filters from server")
             }
         }
     }
@@ -178,6 +178,12 @@ class StandardViewModel(application: Application) : AndroidViewModel(application
         } catch (e: IOException) {
             false
         }
+    }
+
+
+
+    fun setFailedToNull(){
+        _failed.value = null
     }
 
 

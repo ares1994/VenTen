@@ -1,8 +1,13 @@
 package com.arepadeobiri.arepadeobiri.dataModels
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class FilterItem(
+
+@Parcelize
+data class FilterItem (
 
 	@field:SerializedName("gender")
 	val gender: String? = null,
@@ -21,4 +26,6 @@ data class FilterItem(
 
 	@field:SerializedName("colors")
 	val colors: List<String?>? = null
-)
+) : Parcelable
+
+

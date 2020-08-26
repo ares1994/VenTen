@@ -3,11 +3,13 @@ package com.arepadeobiri.arepadeobiri
 
 import android.view.View
 import com.arepadeobiri.arepadeobiri.dataModels.CarOwner
+import com.arepadeobiri.arepadeobiri.dataModels.FilterItem
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.*
 import java.nio.charset.Charset
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class Util {
@@ -26,7 +28,6 @@ class Util {
         }
 
 
-
         //Provides OkHttpClient for Network calls
         fun provideClient(
             httpLoggingInterceptor: HttpLoggingInterceptor
@@ -39,10 +40,6 @@ class Util {
         }
 
 
-
-
-
-
         //Checks for CSV file in VenTen folder and returns it if present
         fun checkForCsv(mainDirectory: File?): File? {
             val tempDirectory = File(mainDirectory, "VenTen")
@@ -53,11 +50,6 @@ class Util {
                     .isNullOrEmpty()
             ) tempDirectory.listFiles()!![0] else null
         }
-
-
-
-
-
 
 
         //Reads Info from car owners CSV file
@@ -101,13 +93,40 @@ class Util {
         }
 
 
-
-
-
-        fun getSnackBar(view: View, text:String){
+        fun getSnackBar(view: View, text: String) {
 
             Snackbar.make(view, text, Snackbar.LENGTH_LONG).show()
 
+        }
+
+
+        fun getFilteredCarOwners(filterItem: FilterItem, list: List<CarOwner?>?): List<CarOwner?>? {
+            val filteredList = mutableListOf<CarOwner?>()
+
+            list?.forEach {
+
+                if ((!it?.gender.isNullOrBlank() && it?.gender?.toLowerCase(Locale.getDefault()) == filterItem.gender?.toLowerCase(
+                        Locale.getDefault()
+                    ))
+                    && (it?.carModelYear!!.toInt() >= filterItem.startYear!!.toInt() && it.carModelYear.toInt() <= filterItem.endYear!!.toInt())
+                    && (filterItem.countries?.find { country ->
+                        country?.toLowerCase(Locale.getDefault()) == it.country.toLowerCase(
+                            Locale.getDefault()
+                        )
+                    } != null)
+                    && (filterItem.colors?.find { colors ->
+                        colors?.toLowerCase(Locale.getDefault()) == it.color.toLowerCase(
+                            Locale.getDefault()
+                        )
+                    } != null)
+                ) {
+                    filteredList.add(it)
+                }
+
+            }
+
+
+            return filteredList
         }
 
     }

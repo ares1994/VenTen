@@ -16,6 +16,7 @@
     <LinearLayout
         android:id="@+id/container"
         listener="@{listener}"
+        filterItem="@{filter}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
