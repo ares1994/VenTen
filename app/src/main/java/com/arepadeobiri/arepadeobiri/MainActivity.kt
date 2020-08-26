@@ -3,9 +3,11 @@ package com.arepadeobiri.arepadeobiri
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.arepadeobiri.arepadeobiri.dataModels.FilterItem
 import com.arepadeobiri.arepadeobiri.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity(), FilterRecyclerAdapter.FilterOnClickedL
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
+        binding.refreshLayout.setColorSchemeColors(getColor(R.color.colorPrimary))
+
         val viewModelFactory =
             GeneralViewModelFactory(application)
 
@@ -32,10 +36,15 @@ class MainActivity : AppCompatActivity(), FilterRecyclerAdapter.FilterOnClickedL
         recyclerView.adapter = filterRecyclerAdapter
 
 
-        //Receive CSV File
-        viewModel.csvFile.observe(this, Observer {
+        //Handle failed filters request
+        viewModel.failed.observe(this, Observer {
+            if (it == null) return@Observer
+
+            Util.getSnackBar(binding.root, it)
+            binding.refreshLayout.isRefreshing = false
 
 
+            viewModel.setFailedToNull()
         })
 
 
@@ -43,12 +52,24 @@ class MainActivity : AppCompatActivity(), FilterRecyclerAdapter.FilterOnClickedL
         viewModel.filters.observe(this, Observer {
 
 
+//            binding.progressBar.visibility = View.GONE
             filterRecyclerAdapter.submitList(it)
+
+            binding.refreshLayout.isRefreshing = false
         })
+
+
+
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getFilters()
+
+            binding.refreshLayout.isRefreshing = true
+        }
 
 
         //Get Filters
         viewModel.getFilters()
+        binding.refreshLayout.isRefreshing = true
 
         //Get CSV
         viewModel.downloadCsv(this.externalCacheDir)
@@ -56,12 +77,14 @@ class MainActivity : AppCompatActivity(), FilterRecyclerAdapter.FilterOnClickedL
 
     }
 
-    override fun onClicked() {
+    override fun onClicked(filter: FilterItem) {
         if (viewModel.csvFile.value == null) {
             Util.getSnackBar(binding.root, "Car Owners source data not found")
             return
         }
 
-        startActivity(Intent(this, FilteredActivity::class.java))
+        startActivity(Intent(this, FilteredActivity::class.java).apply {
+            putExtra("filter", filter)
+        })
     }
 }

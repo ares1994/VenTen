@@ -1,25 +1,18 @@
 package com.arepadeobiri.arepadeobiri
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.arepadeobiri.arepadeobiri.dataModels.FilterItem
-import com.arepadeobiri.arepadeobiri.databinding.ItemFiltersLayoutBinding
-import java.util.*
+import com.arepadeobiri.arepadeobiri.dataModels.CarOwner
+import com.arepadeobiri.arepadeobiri.databinding.ItemFilteredLayoutBinding
 
 
-class FilterRecyclerAdapter(private val listener: FilterOnClickedListener) :
-    ListAdapter<FilterItem, FilterRecyclerAdapter.ViewHolder>(
-        FilterItemInstanceDiffCallback()
+class FilteredRecyclerAdapter :
+    ListAdapter<CarOwner, FilteredRecyclerAdapter.ViewHolder>(
+        FilteredItemInstanceDiffCallback()
     ) {
-
-
-    interface FilterOnClickedListener {
-        fun onClicked(filter: FilterItem)
-    }
 
 
     override fun onCreateViewHolder(
@@ -32,23 +25,21 @@ class FilterRecyclerAdapter(private val listener: FilterOnClickedListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val filter = getItem(position)
-        holder.bind(filter, listener, Util.CHART_COLORS[position%Util.CHART_COLORS.size])
+        val carOwner = getItem(position)
+        holder.bind(carOwner, Util.CHART_COLORS[position%Util.CHART_COLORS.size])
     }
 
 
-    class ViewHolder private constructor(private val binding: ItemFiltersLayoutBinding) :
+    class ViewHolder private constructor(private val binding: ItemFilteredLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(
-            filter: FilterItem,
-            listener: FilterOnClickedListener,
-            color:Int
+            carOwner: CarOwner,
+            color : Int
         ) {
             binding.color = color
-            binding.filter = filter
-            binding.listener = listener
+            binding.carOwner = carOwner
             binding.executePendingBindings()
         }
 
@@ -57,7 +48,7 @@ class FilterRecyclerAdapter(private val listener: FilterOnClickedListener) :
             fun from(parent: ViewGroup): ViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
                 val binding =
-                    ItemFiltersLayoutBinding.inflate(inflater, parent, false)
+                    ItemFilteredLayoutBinding.inflate(inflater, parent, false)
 
 
                 return ViewHolder(binding)
@@ -66,17 +57,17 @@ class FilterRecyclerAdapter(private val listener: FilterOnClickedListener) :
     }
 
 
-    class FilterItemInstanceDiffCallback : DiffUtil.ItemCallback<FilterItem>() {
+    class FilteredItemInstanceDiffCallback : DiffUtil.ItemCallback<CarOwner>() {
         override fun areItemsTheSame(
-            oldItem: FilterItem,
-            newItem: FilterItem
+            oldItem: CarOwner,
+            newItem: CarOwner
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: FilterItem,
-            newItem: FilterItem
+            oldItem: CarOwner,
+            newItem: CarOwner
         ): Boolean {
             return oldItem == newItem
         }

@@ -3,5 +3,15 @@
     <string name="date_format">Date Range: %s - %s</string>
     <string name="gender_format">Gender: %s</string>
     <string name="countries_format">Countries: %s</string>
-    <string name="colors_format">Countries: %s</string>
+    <string name="colors_format">Colors: %s</string>
+
+    <string name="email_format">Email: %s</string>
+    <string name="country_format">Country: %s</string>
+    <string name="model_format">Car Model: %s</string>
+    <string name="year_format">Car Model Year: %s</string>
+    <string name="color_format">Color: %s</string>
+    <string name="job_format">Job: %s</string>
+
+    <string name="name_format">Name: %s</string>
+
 </resources>

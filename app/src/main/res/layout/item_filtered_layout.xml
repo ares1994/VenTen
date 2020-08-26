@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="carOwner"
+            type="com.arepadeobiri.arepadeobiri.dataModels.CarOwner" />
+
+        <variable
+            name="color"
+            type="int" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        backgroundColor="@{color}"
+        android:id="@+id/container"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/nameTextView"
+            style="@style/paragraphOne"
+            name="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Arepade Obiri" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            style="@style/paragraphOne"
+            email="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Email: arepade.obiri@hotmail.com" />
+
+        <TextView
+            android:id="@+id/countryTextView"
+            style="@style/paragraphOne"
+            country="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Countries: Norway, Singapore, Nigeria" />
+
+        <TextView
+            android:id="@+id/carModelTextView"
+            style="@style/paragraphOne"
+            car_model="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Hyumdai" />
+
+        <TextView
+            android:id="@+id/modelYearTextView"
+            style="@style/paragraphOne"
+            car_year="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Model Year: 1994" />
+
+        <TextView
+            android:id="@+id/colorTextView"
+            style="@style/paragraphOne"
+            car_color="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Color: Blue" />
+
+        <TextView
+            android:id="@+id/genderTextView"
+            style="@style/paragraphOne"
+            car_owner_gender="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Gender: Male" />
+
+        <TextView
+            android:id="@+id/jobTextView"
+            style="@style/paragraphOne"
+            job="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:text="Job: Software dev" />
+
+        <TextView
+            android:id="@+id/bioTextView"
+            style="@style/paragraphTwo"
+            bio="@{carOwner}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="4dp"
+            android:padding="8dp"
+            tools:text="Bio: Ares did this and did it well. Why you ask? Because Ares is good" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/demarcation_tint" />
+
+
+    </LinearLayout>
+</layout>
