@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Arepade Obiri</string>
+    <string name="date_format">Date Range: %s - %s</string>
+    <string name="gender_format">Gender: %s</string>
+    <string name="countries_format">Countries: %s</string>
+    <string name="colors_format">Countries: %s</string>
+</resources>

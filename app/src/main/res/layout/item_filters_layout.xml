@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="8dp">
+
+    <TextView
+        android:id="@+id/dateTextView"
+        style="@style/paragraphOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        tools:text="Date Range: 1990 - 2005" />
+
+    <TextView
+        android:id="@+id/genderTextView"
+        style="@style/paragraphOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        tools:text="Gender: Male" />
+
+    <TextView
+        android:id="@+id/countriesTextView"
+        style="@style/paragraphOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        tools:text="Countries: Norway, Singapore, Nigeria" />
+
+    <TextView
+        android:id="@+id/colorsTextView"
+        style="@style/paragraphOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        tools:text="Color: Blue, Black, Yellow, Red" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/demarcation_tint" />
+
+
+</LinearLayout>
