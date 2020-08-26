@@ -1,7 +1,9 @@
 package com.arepadeobiri.arepadeobiri
 
 
+import android.view.View
 import com.arepadeobiri.arepadeobiri.dataModels.CarOwner
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.*
@@ -98,6 +100,15 @@ class Util {
             }
         }
 
+
+
+
+
+        fun getSnackBar(view: View, text:String){
+
+            Snackbar.make(view, text, Snackbar.LENGTH_LONG).show()
+
+        }
 
     }
 }

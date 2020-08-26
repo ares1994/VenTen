@@ -2,84 +2,65 @@ package com.arepadeobiri.arepadeobiri
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.arepadeobiri.arepadeobiri.dataModels.FilterItem
-import kotlinx.android.synthetic.main.item_filters_layout.view.*
+import com.arepadeobiri.arepadeobiri.databinding.ItemFiltersLayoutBinding
 import java.util.*
 
 
-class FilterRecyclerAdapter :
+class FilterRecyclerAdapter(private val listener: FilterOnClickedListener) :
     ListAdapter<FilterItem, FilterRecyclerAdapter.ViewHolder>(
         FilterItemInstanceDiffCallback()
     ) {
 
+
+    interface FilterOnClickedListener {
+        fun onClicked()
+    }
 
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_filters_layout, parent, false)
-
-
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
-
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val filter = getItem(position)
-
-
-        holder.apply {
-            dateTextView.apply {
-                text = context.getString(R.string.date_format,filter.startYear.toString(), filter.endYear.toString())
-            }
-
-
-            genderTextView.apply {
-                text = context.getString(R.string.gender_format,if (filter.gender.isNullOrBlank())"N/A" else filter.gender.toLowerCase(Locale.getDefault()).capitalize())
-            }
-
-
-            countriesTextView.apply {
-                val countries = filter.countries.toString().drop(1).dropLast(1)
-
-                text = context.getString(R.string.countries_format,if (countries.isBlank())"N/A" else countries)
-            }
-
-
-            colorsTextView.apply {
-                val colors = filter.colors.toString().drop(1).dropLast(1)
-
-                text = context.getString(R.string.colors_format,if (colors.isBlank()) "N/A" else colors)
-            }
-
-
-
-        }
-
-
+        holder.bind(filter, listener)
     }
 
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder private constructor(private val binding: ItemFiltersLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        val dateTextView: TextView = itemView.dateTextView
 
-        val colorsTextView: TextView = itemView.colorsTextView
+        fun bind(
+            filter: FilterItem,
+            listener: FilterOnClickedListener
+        ) {
+            binding.filter = filter
+            binding.listener = listener
+            binding.executePendingBindings()
+        }
 
-        val countriesTextView: TextView = itemView.countriesTextView
 
-        val genderTextView: TextView = itemView.genderTextView
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val inflater = LayoutInflater.from(parent.context)
+                val binding =
+                    ItemFiltersLayoutBinding.inflate(inflater, parent, false)
+
+
+                return ViewHolder(binding)
+            }
+        }
     }
 
 
@@ -100,4 +81,6 @@ class FilterRecyclerAdapter :
 
 
     }
+
+
 }
